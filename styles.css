@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    background-color: brown;
+    box-sizing: border-box;
+    height: 500px;
+    width: 400px;
+    padding: 30px;
+}
+
+#input {
+    height: 50px;
+    width: 300px;
+    background-color: aqua;
+    margin: 10px 20px;
+}
+
+button {
+    margin: 10px;
+}

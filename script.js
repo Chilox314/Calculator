@@ -1,5 +1,6 @@
 //variables
-let input;
+let input = "";
+let output = "";
 
 const addBtn = document.getElementById("add");
 const substractBtn = document.getElementById("substract");
@@ -27,27 +28,42 @@ const inputField = document.getElementById("input");
 
 //wiring of all the buttons
 
-addBtn.addEventListener("click", () => inputField.textContent += "+");
-substractBtn.addEventListener("click", () => inputField.textContent += "-");
-multiplyBtn.addEventListener("click", () => inputField.textContent += "*");
-divideBtn.addEventListener("click", () => inputField.textContent += "/");
-powerBtn.addEventListener("click", () => inputField.textContent += "^");
+addBtn.addEventListener("click", () => {input += "+"; inputField.textContent = input});
+substractBtn.addEventListener("click", () => {input += "-"; inputField.textContent = input});
+multiplyBtn.addEventListener("click", () => {input += "*"; inputField.textContent = input});
+divideBtn.addEventListener("click", () => {input += "/"; inputField.textContent = input});
+powerBtn.addEventListener("click", () => {input += "^"; inputField.textContent = input});
 
-oneBtn.addEventListener("click", () => inputField.textContent += "1");
-twoBtn.addEventListener("click", () => inputField.textContent += "2");
-threeBtn.addEventListener("click", () => inputField.textContent += "3");
-fourBtn.addEventListener("click", () => inputField.textContent += "4");
-fiveBtn.addEventListener("click", () => inputField.textContent += "5");
-sixBtn.addEventListener("click", () => inputField.textContent += "6");
-sevenBtn.addEventListener("click", () => inputField.textContent += "7");
-eightBtn.addEventListener("click", () => inputField.textContent += "8");
-nineBtn.addEventListener("click", () => inputField.textContent += "9");
-zeroBtn.addEventListener("click", () => inputField.textContent += "0");
+oneBtn.addEventListener("click", () => {input += "1"; inputField.textContent = input});
+twoBtn.addEventListener("click", () => {input += "2"; inputField.textContent = input});
+threeBtn.addEventListener("click", () => {input += "3"; inputField.textContent = input});
+fourBtn.addEventListener("click", () => {input += "4"; inputField.textContent = input});
+fiveBtn.addEventListener("click", () => {input += "5"; inputField.textContent = input});
+sixBtn.addEventListener("click", () => {input += "6"; inputField.textContent = input});
+sevenBtn.addEventListener("click", () => {input += "7"; inputField.textContent = input});
+eightBtn.addEventListener("click", () => {input += "8"; inputField.textContent = input});
+nineBtn.addEventListener("click", () => {input += "9"; inputField.textContent = input});
+zeroBtn.addEventListener("click", () => {input += "0"; inputField.textContent = input});
 
-allClearBtn.addEventListener("click", () => inputField.textContent = "");
+allClearBtn.addEventListener("click", () => {input = ""; inputField.textContent = input});
 deleteBtn.addEventListener("click", () => {
-    let inputFieldText = inputField.textContent;
+    input = input.substring(0,input.length - 1);
+    inputField.textContent = input;
 });
+
+equalsBtn.addEventListener("click", () => {
+    calculate(input);
+})
+
+//main function calcualte
+
+function calculate(input) {
+    //code to calculate
+    //To-Do:
+    //seperate Numbers and operators
+    //loop through array and calculate
+    //print output
+}
 
 //operating functions
 

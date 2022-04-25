@@ -18,11 +18,21 @@ body {
     padding: 30px;
 }
 
-#input {
+.result {
     height: 50px;
     width: 300px;
     background-color: aqua;
     margin: 10px 20px;
+}
+
+#input {
+    height: 25px;
+    width: 300px;
+}
+
+#output {
+    height: 25px;
+    width: 300px;
 }
 
 button {

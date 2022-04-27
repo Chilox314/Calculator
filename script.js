@@ -25,6 +25,7 @@ const deleteBtn = document.getElementById("delete");
 const pointBtn = document.getElementById("point");
 
 const inputField = document.getElementById("input");
+const outputField = document.getElementById("output");
 
 //wiring of all the buttons
 
@@ -34,18 +35,18 @@ multiplyBtn.addEventListener("click", () => {input += "*"; inputField.textConten
 divideBtn.addEventListener("click", () => {input += "/"; inputField.textContent = input});
 powerBtn.addEventListener("click", () => {input += "^"; inputField.textContent = input});
 
-oneBtn.addEventListener("click", () => {input += "1"; inputField.textContent = input});
-twoBtn.addEventListener("click", () => {input += "2"; inputField.textContent = input});
-threeBtn.addEventListener("click", () => {input += "3"; inputField.textContent = input});
-fourBtn.addEventListener("click", () => {input += "4"; inputField.textContent = input});
-fiveBtn.addEventListener("click", () => {input += "5"; inputField.textContent = input});
-sixBtn.addEventListener("click", () => {input += "6"; inputField.textContent = input});
-sevenBtn.addEventListener("click", () => {input += "7"; inputField.textContent = input});
-eightBtn.addEventListener("click", () => {input += "8"; inputField.textContent = input});
-nineBtn.addEventListener("click", () => {input += "9"; inputField.textContent = input});
-zeroBtn.addEventListener("click", () => {input += "0"; inputField.textContent = input});
+oneBtn.addEventListener("click", () => {input += 1; inputField.textContent = input});
+twoBtn.addEventListener("click", () => {input += 2; inputField.textContent = input});
+threeBtn.addEventListener("click", () => {input += 3; inputField.textContent = input});
+fourBtn.addEventListener("click", () => {input += 4; inputField.textContent = input});
+fiveBtn.addEventListener("click", () => {input += 5; inputField.textContent = input});
+sixBtn.addEventListener("click", () => {input += 6; inputField.textContent = input});
+sevenBtn.addEventListener("click", () => {input += 7; inputField.textContent = input});
+eightBtn.addEventListener("click", () => {input += 8; inputField.textContent = input});
+nineBtn.addEventListener("click", () => {input += 9; inputField.textContent = input});
+zeroBtn.addEventListener("click", () => {input += 0; inputField.textContent = input});
 
-allClearBtn.addEventListener("click", () => {input = ""; inputField.textContent = input});
+allClearBtn.addEventListener("click", () => {input = ""; inputField.textContent = input; output = ""; outputField.textContent = output});
 deleteBtn.addEventListener("click", () => {
     input = input.substring(0,input.length - 1);
     inputField.textContent = input;
@@ -53,16 +54,28 @@ deleteBtn.addEventListener("click", () => {
 
 equalsBtn.addEventListener("click", () => {
     calculate(input);
+    input = "";
 })
 
 //main function calcualte
 
 function calculate(input) {
-    //code to calculate
-    //To-Do:
-    //seperate Numbers and operators
-    //loop through array and calculate
-    //print output
+    const inputArray = input.split("");
+    console.log(inputArray)
+    for (let i = inputArray.length - 1; i >= 0; i-- ) {
+        if (isNaN(inputArray[i]) === false && isNaN(inputArray[i-1]) === false) {
+            inputArray[i-1] = inputArray[i-1] + inputArray[i];
+            inputArray.splice(i, 1);
+        }
+    };
+    while (inputArray[2] != undefined) {
+        inputArray[0] = operate(Number(inputArray[0]),inputArray[1],Number(inputArray[2]));
+        inputArray.splice(2,1);
+        inputArray.splice(1,1);
+        console.log(inputArray)
+    };
+    output = inputArray[0];
+    outputField.textContent = "=" + output;
 }
 
 //operating functions
@@ -80,27 +93,30 @@ function multiply(num1,num2) {
 };
 
 function divide(num1,num2) {
-    return num1/num2;
+    if (num2 === 0) {
+        return "Don't try this you ****!"
+    }  
+    else {return num1/num2};
 };
 
 function power(num1,num2) {
     return num1**num2;
 };
 
-function operate(operator,num1,num2) {
+function operate(num1,operator,num2) {
     if (operator === "+") {
-        add(num1,num2);
+        return add(num1,num2);
     }
     else if (operator === "-") {
-        substract(num1,num2);
+        return substract(num1,num2);
     }
     else if (operator === "*") {
-        multiply(num1,num2);
+        return multiply(num1,num2);
     }
     else if (operator === "/") {
-        divide(num1,num2);
+        return divide(num1,num2);
     }
-    else if (operator === "**") {
-        power(num1,num2)
+    else if (operator === "^") {
+        return power(num1,num2);
     }
 }

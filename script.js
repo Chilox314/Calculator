@@ -1,3 +1,12 @@
+//To do:
+//Add support for +/- sign
+//Add support for Ans
+//Add factorial
+//Add support for floating points
+//Add mathematical or syntax errors 
+//Add keyboard support
+//Add sqrt() support
+
 //variables
 let input = "";
 let output = "";
@@ -29,32 +38,33 @@ const outputField = document.getElementById("output");
 
 //wiring of all the buttons
 
-addBtn.addEventListener("click", () => {input += "+"; inputField.textContent = input});
-substractBtn.addEventListener("click", () => {input += "-"; inputField.textContent = input});
-multiplyBtn.addEventListener("click", () => {input += "*"; inputField.textContent = input});
-divideBtn.addEventListener("click", () => {input += "/"; inputField.textContent = input});
-powerBtn.addEventListener("click", () => {input += "^"; inputField.textContent = input});
+addBtn.addEventListener("click", () => {input += "+"; inputField.textContent = input; output = ""; outputField.textContent = output});
+substractBtn.addEventListener("click", () => {input += "-"; inputField.textContent = input; output = ""; outputField.textContent = output});
+multiplyBtn.addEventListener("click", () => {input += "*"; inputField.textContent = input; output = ""; outputField.textContent = output});
+divideBtn.addEventListener("click", () => {input += "/"; inputField.textContent = input; output = ""; outputField.textContent = output});
+powerBtn.addEventListener("click", () => {input += "^"; inputField.textContent = input; output = ""; outputField.textContent = output});
 
-oneBtn.addEventListener("click", () => {input += 1; inputField.textContent = input});
-twoBtn.addEventListener("click", () => {input += 2; inputField.textContent = input});
-threeBtn.addEventListener("click", () => {input += 3; inputField.textContent = input});
-fourBtn.addEventListener("click", () => {input += 4; inputField.textContent = input});
-fiveBtn.addEventListener("click", () => {input += 5; inputField.textContent = input});
-sixBtn.addEventListener("click", () => {input += 6; inputField.textContent = input});
-sevenBtn.addEventListener("click", () => {input += 7; inputField.textContent = input});
-eightBtn.addEventListener("click", () => {input += 8; inputField.textContent = input});
-nineBtn.addEventListener("click", () => {input += 9; inputField.textContent = input});
-zeroBtn.addEventListener("click", () => {input += 0; inputField.textContent = input});
+oneBtn.addEventListener("click", () => {input += 1; inputField.textContent = input; output = ""; outputField.textContent = output});
+twoBtn.addEventListener("click", () => {input += 2; inputField.textContent = input; output = ""; outputField.textContent = output});
+threeBtn.addEventListener("click", () => {input += 3; inputField.textContent = input; output = ""; outputField.textContent = output});
+fourBtn.addEventListener("click", () => {input += 4; inputField.textContent = input; output = ""; outputField.textContent = output});
+fiveBtn.addEventListener("click", () => {input += 5; inputField.textContent = input; output = ""; outputField.textContent = output});
+sixBtn.addEventListener("click", () => {input += 6; inputField.textContent = input; output = ""; outputField.textContent = output});
+sevenBtn.addEventListener("click", () => {input += 7; inputField.textContent = input; output = ""; outputField.textContent = output});
+eightBtn.addEventListener("click", () => {input += 8; inputField.textContent = input; output = ""; outputField.textContent = output});
+nineBtn.addEventListener("click", () => {input += 9; inputField.textContent = input; output = ""; outputField.textContent = output});
+zeroBtn.addEventListener("click", () => {input += 0; inputField.textContent = input; output = ""; outputField.textContent = output});
 
 allClearBtn.addEventListener("click", () => {input = ""; inputField.textContent = input; output = ""; outputField.textContent = output});
 deleteBtn.addEventListener("click", () => {
     input = input.substring(0,input.length - 1);
     inputField.textContent = input;
+    //output = ""; 
+    //outputField.textContent = output;
 });
 
 equalsBtn.addEventListener("click", () => {
     calculate(input);
-    input = "";
 })
 
 //main function calcualte

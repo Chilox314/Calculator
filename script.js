@@ -18,6 +18,8 @@ const multiplyBtn = document.getElementById("multiply");
 const divideBtn = document.getElementById("divide");
 const powerBtn = document.getElementById("power");
 const ansBtn = document.getElementById("answer");
+const sqrtBtn = document.getElementById("sqrt");
+const factorialBtn = document.getElementById("factorial")
 
 const oneBtn = document.getElementById("one");
 const twoBtn = document.getElementById("two");
@@ -45,7 +47,8 @@ substractBtn.addEventListener("click", () => {input += "-"; inputField.textConte
 multiplyBtn.addEventListener("click", () => {input += "*"; inputField.textContent = input; output = ""; outputField.textContent = output});
 divideBtn.addEventListener("click", () => {input += "/"; inputField.textContent = input; output = ""; outputField.textContent = output});
 powerBtn.addEventListener("click", () => {input += "^"; inputField.textContent = input; output = ""; outputField.textContent = output});
-ansBtn.addEventListener("click", () => {input += answer; inputField.textContent = input; output = ""; outputField.textContent = output})
+ansBtn.addEventListener("click", () => {input += answer; inputField.textContent = input; output = ""; outputField.textContent = output});
+sqrtBtn.addEventListener("click", () => {input += "√"; inputField.textContent = input; output = ""; outputField.textContent = output})
 
 oneBtn.addEventListener("click", () => {input += 1; inputField.textContent = input; output = ""; outputField.textContent = output});
 twoBtn.addEventListener("click", () => {input += 2; inputField.textContent = input; output = ""; outputField.textContent = output});
@@ -74,12 +77,15 @@ equalsBtn.addEventListener("click", () => {
 
 function calculate(input) {
     const inputArray = input.split("");
-    console.log(inputArray)
     for (let i = inputArray.length - 1; i >= 0; i-- ) {
         if (isNaN(inputArray[i]) === false && isNaN(inputArray[i-1]) === false) {
             inputArray[i-1] = inputArray[i-1] + inputArray[i];
             inputArray.splice(i, 1);
         }
+        else if (inputArray[i-1] === "√" && isNaN(inputArray[i]) === false) {
+            inputArray[i-1] = Math.sqrt(inputArray[i]);
+            inputArray.splice(i, 1);
+        };
     };
     while (inputArray[2] != undefined) {
         inputArray[0] = operate(Number(inputArray[0]),inputArray[1],Number(inputArray[2]));

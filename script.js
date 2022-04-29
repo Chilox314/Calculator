@@ -1,11 +1,9 @@
 //To do:
 //Add support for +/- sign
-//Add support for Ans
 //Add factorial
 //Add support for floating points
 //Add mathematical or syntax errors 
 //Add keyboard support
-//Add sqrt() support
 
 //variables
 let input = "";
@@ -48,7 +46,8 @@ multiplyBtn.addEventListener("click", () => {input += "*"; inputField.textConten
 divideBtn.addEventListener("click", () => {input += "/"; inputField.textContent = input; output = ""; outputField.textContent = output});
 powerBtn.addEventListener("click", () => {input += "^"; inputField.textContent = input; output = ""; outputField.textContent = output});
 ansBtn.addEventListener("click", () => {input += answer; inputField.textContent = input; output = ""; outputField.textContent = output});
-sqrtBtn.addEventListener("click", () => {input += "√"; inputField.textContent = input; output = ""; outputField.textContent = output})
+sqrtBtn.addEventListener("click", () => {input += "√"; inputField.textContent = input; output = ""; outputField.textContent = output});
+factorialBtn.addEventListener("click", () => {input += "!"; inputField.textContent = input; output = ""; outputField.textContent = output})
 
 oneBtn.addEventListener("click", () => {input += 1; inputField.textContent = input; output = ""; outputField.textContent = output});
 twoBtn.addEventListener("click", () => {input += 2; inputField.textContent = input; output = ""; outputField.textContent = output});
@@ -85,7 +84,11 @@ function calculate(input) {
         else if (inputArray[i-1] === "√" && isNaN(inputArray[i]) === false) {
             inputArray[i-1] = Math.sqrt(inputArray[i]);
             inputArray.splice(i, 1);
-        };
+        }
+        else if (inputArray[i] === "!" && isNaN(inputArray[i-1]) === false ) {
+            inputArray[i-1] = factorial(inputArray[i-1]);
+            inputArray.splice(i, 1);
+        }
     };
     while (inputArray[2] != undefined) {
         inputArray[0] = operate(Number(inputArray[0]),inputArray[1],Number(inputArray[2]));
@@ -120,6 +123,14 @@ function divide(num1,num2) {
 
 function power(num1,num2) {
     return num1**num2;
+};
+
+function factorial(num) {
+    let result = 1;
+    for (let i = 1; i<=num; i++ ) {
+        result *= i;
+    };
+    return result;
 };
 
 function operate(num1,operator,num2) {

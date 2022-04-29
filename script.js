@@ -60,7 +60,8 @@ sevenBtn.addEventListener("click", () => setInput("7"));
 eightBtn.addEventListener("click", () => setInput("8"));
 nineBtn.addEventListener("click", () => setInput("9"));
 zeroBtn.addEventListener("click", () => setInput("0"));
-pointBtn.addEventListener("click", () => setInput("."))
+
+pointBtn.addEventListener("click", () => {setInput(".")});
 
 allClearBtn.addEventListener("click", () => {input = ""; inputField.textContent = input; output = ""; outputField.textContent = output});
 deleteBtn.addEventListener("click", () => {

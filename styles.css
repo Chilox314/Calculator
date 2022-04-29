@@ -11,18 +11,22 @@ body {
 }
 
 .calculator {
-    background-color: brown;
+    background-color: rgb(53, 45, 45);
     box-sizing: border-box;
     height: 500px;
-    width: 400px;
+    width: 375px;
     padding: 30px;
+    border-radius: 15px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .result {
-    height: 50px;
-    width: 300px;
-    background-color: aqua;
-    margin: 10px 20px;
+    height: 60px;
+    width: 315px;
+    background-color: rgb(136, 156, 124);
+    border-radius: 15px;
 }
 
 #input {
@@ -35,6 +39,47 @@ body {
     width: 300px;
 }
 
+.buttons {
+    display: flex;
+    flex-direction: column; 
+    margin-top: 30px;
+}
+
+.btnsLow {
+    display: flex;
+}
+
+.btnsHigh {
+    display: flex;
+}
+
+.btnsLeft {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btnsMid {
+    display: flex;
+    flex-direction: column;
+}
+
+.btnsRight {
+    display: flex;
+    flex-direction: column;
+}
+
 button {
-    margin: 10px;
+    margin: 7.5px;
+    height: 48px;
+    width: 48px;
+    border-width: 0px;
+    padding: 0px;
+}
+
+.wideBtn {
+    width: 111px;
+}
+
+.highBtn {
+    height: 111px;
 }

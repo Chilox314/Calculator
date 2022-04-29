@@ -10,12 +10,14 @@
 //variables
 let input = "";
 let output = "";
+let answer = "";
 
 const addBtn = document.getElementById("add");
 const substractBtn = document.getElementById("substract");
 const multiplyBtn = document.getElementById("multiply");
 const divideBtn = document.getElementById("divide");
 const powerBtn = document.getElementById("power");
+const ansBtn = document.getElementById("answer");
 
 const oneBtn = document.getElementById("one");
 const twoBtn = document.getElementById("two");
@@ -43,6 +45,7 @@ substractBtn.addEventListener("click", () => {input += "-"; inputField.textConte
 multiplyBtn.addEventListener("click", () => {input += "*"; inputField.textContent = input; output = ""; outputField.textContent = output});
 divideBtn.addEventListener("click", () => {input += "/"; inputField.textContent = input; output = ""; outputField.textContent = output});
 powerBtn.addEventListener("click", () => {input += "^"; inputField.textContent = input; output = ""; outputField.textContent = output});
+ansBtn.addEventListener("click", () => {input += answer; inputField.textContent = input; output = ""; outputField.textContent = output})
 
 oneBtn.addEventListener("click", () => {input += 1; inputField.textContent = input; output = ""; outputField.textContent = output});
 twoBtn.addEventListener("click", () => {input += 2; inputField.textContent = input; output = ""; outputField.textContent = output});
@@ -59,8 +62,8 @@ allClearBtn.addEventListener("click", () => {input = ""; inputField.textContent 
 deleteBtn.addEventListener("click", () => {
     input = input.substring(0,input.length - 1);
     inputField.textContent = input;
-    //output = ""; 
-    //outputField.textContent = output;
+    output = ""; 
+    outputField.textContent = output;
 });
 
 equalsBtn.addEventListener("click", () => {
@@ -82,10 +85,10 @@ function calculate(input) {
         inputArray[0] = operate(Number(inputArray[0]),inputArray[1],Number(inputArray[2]));
         inputArray.splice(2,1);
         inputArray.splice(1,1);
-        console.log(inputArray)
     };
     output = inputArray[0];
-    outputField.textContent = "=" + output;
+    answer = output;
+    outputField.textContent = output;
 }
 
 //operating functions

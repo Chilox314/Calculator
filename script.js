@@ -1,9 +1,6 @@
 //To do:
 //Add support for +/- sign
-//Add factorial
-//Add support for floating points
 //Add mathematical or syntax errors 
-//Add keyboard support
 
 //variables
 let input = "";
@@ -40,25 +37,30 @@ const outputField = document.getElementById("output");
 
 //wiring of all the buttons
 
-addBtn.addEventListener("click", () => {input += "+"; inputField.textContent = input; output = ""; outputField.textContent = output});
-substractBtn.addEventListener("click", () => {input += "-"; inputField.textContent = input; output = ""; outputField.textContent = output});
-multiplyBtn.addEventListener("click", () => {input += "*"; inputField.textContent = input; output = ""; outputField.textContent = output});
-divideBtn.addEventListener("click", () => {input += "/"; inputField.textContent = input; output = ""; outputField.textContent = output});
-powerBtn.addEventListener("click", () => {input += "^"; inputField.textContent = input; output = ""; outputField.textContent = output});
-ansBtn.addEventListener("click", () => {input += answer; inputField.textContent = input; output = ""; outputField.textContent = output});
-sqrtBtn.addEventListener("click", () => {input += "√"; inputField.textContent = input; output = ""; outputField.textContent = output});
-factorialBtn.addEventListener("click", () => {input += "!"; inputField.textContent = input; output = ""; outputField.textContent = output})
+function setInput(setInp) {
+    input += setInp; inputField.textContent = input; output = ""; outputField.textContent = output;
+};
 
-oneBtn.addEventListener("click", () => {input += 1; inputField.textContent = input; output = ""; outputField.textContent = output});
-twoBtn.addEventListener("click", () => {input += 2; inputField.textContent = input; output = ""; outputField.textContent = output});
-threeBtn.addEventListener("click", () => {input += 3; inputField.textContent = input; output = ""; outputField.textContent = output});
-fourBtn.addEventListener("click", () => {input += 4; inputField.textContent = input; output = ""; outputField.textContent = output});
-fiveBtn.addEventListener("click", () => {input += 5; inputField.textContent = input; output = ""; outputField.textContent = output});
-sixBtn.addEventListener("click", () => {input += 6; inputField.textContent = input; output = ""; outputField.textContent = output});
-sevenBtn.addEventListener("click", () => {input += 7; inputField.textContent = input; output = ""; outputField.textContent = output});
-eightBtn.addEventListener("click", () => {input += 8; inputField.textContent = input; output = ""; outputField.textContent = output});
-nineBtn.addEventListener("click", () => {input += 9; inputField.textContent = input; output = ""; outputField.textContent = output});
-zeroBtn.addEventListener("click", () => {input += 0; inputField.textContent = input; output = ""; outputField.textContent = output});
+addBtn.addEventListener("click", () => setInput("+"));
+substractBtn.addEventListener("click", () => setInput("-"));
+multiplyBtn.addEventListener("click", () => setInput("*"));
+divideBtn.addEventListener("click", () => setInput("/"));
+powerBtn.addEventListener("click", () => setInput("^"));
+ansBtn.addEventListener("click", () => setInput(answer));
+sqrtBtn.addEventListener("click", () => setInput("√"));
+factorialBtn.addEventListener("click", () => setInput("!"));
+
+oneBtn.addEventListener("click", () => setInput("1"));
+twoBtn.addEventListener("click", () => setInput("2"));
+threeBtn.addEventListener("click", () => setInput("3"));
+fourBtn.addEventListener("click", () => setInput("4"));
+fiveBtn.addEventListener("click", () => setInput("5"));
+sixBtn.addEventListener("click", () => setInput("6"));
+sevenBtn.addEventListener("click", () => setInput("7"));
+eightBtn.addEventListener("click", () => setInput("8"));
+nineBtn.addEventListener("click", () => setInput("9"));
+zeroBtn.addEventListener("click", () => setInput("0"));
+pointBtn.addEventListener("click", () => setInput("."))
 
 allClearBtn.addEventListener("click", () => {input = ""; inputField.textContent = input; output = ""; outputField.textContent = output});
 deleteBtn.addEventListener("click", () => {
@@ -72,6 +74,74 @@ equalsBtn.addEventListener("click", () => {
     calculate(input);
 })
 
+//buttons for keyboard support
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "1") {
+        setInput("1");
+    }
+    if (event.key === "2") {
+        setInput("2");
+    }
+    if (event.key === "3") {
+        setInput("3");
+    }
+    if (event.key === "4") {
+        setInput("4");
+    }
+    if (event.key === "5") {
+        setInput("5");
+    }
+    if (event.key === "6") {
+        setInput("6");
+    }
+    if (event.key === "7") {
+        setInput("7");
+    }
+    if (event.key === "8") {
+        setInput("8");
+    }
+    if (event.key === "9") {
+        setInput("9");
+    }
+    if (event.key === "0") {
+        setInput("0");
+    }
+    if (event.key === "+") {
+        setInput("+");
+    }
+    if (event.key === "-") {
+        setInput("-");
+    }
+    if (event.key === "*") {
+        setInput("*");
+    }
+    if (event.key === "/" ) {
+        setInput("/");
+    }
+    if (event.key === "^") {
+        setInput("^");
+    }
+    if (event.key === "!") {
+        setInput("!");
+    }
+    if (event.key === "." || event.key === ",") {
+        setInput(".");
+    }
+    if (event.key === "Enter") {
+        calculate(input);
+    }
+    if (event.key === "Backspace") {
+        input = input.substring(0,input.length - 1);
+        inputField.textContent = input;
+        output = ""; 
+        outputField.textContent = output;
+    }
+    if (event.key === "Enter" && event.key === "Control") {
+        input = ""; inputField.textContent = input; output = ""; outputField.textContent = output
+    }
+})
+
 //main function calcualte
 
 function calculate(input) {
@@ -80,6 +150,10 @@ function calculate(input) {
         if (isNaN(inputArray[i]) === false && isNaN(inputArray[i-1]) === false) {
             inputArray[i-1] = inputArray[i-1] + inputArray[i];
             inputArray.splice(i, 1);
+        }
+        else if (inputArray[i-1] === "." && isNaN(inputArray[i]) === false && isNaN(inputArray[i-2]) === false) {
+            inputArray[i-2] = inputArray[i-2] + "." + inputArray[i];
+            inputArray.splice(i-1, 2);
         }
         else if (inputArray[i-1] === "√" && isNaN(inputArray[i]) === false) {
             inputArray[i-1] = Math.sqrt(inputArray[i]);

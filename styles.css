@@ -162,3 +162,13 @@ a {
     color: rgb(180, 180, 180);
     text-decoration: underline;
 }
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    list-style-type: none;
+    margin-bottom: 25px;
+}

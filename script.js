@@ -1,11 +1,12 @@
 //To do:
 //Add support for +/- sign
-//Add mathematical or syntax errors 
 
 //variables
 let input = "";
 let output = "";
 let answer = "";
+
+const operators = ["+", "-", "*", "/", "^", "."];
 
 const addBtn = document.getElementById("add");
 const substractBtn = document.getElementById("substract");
@@ -143,12 +144,16 @@ document.addEventListener("keydown", function (event) {
     }
 })
 
-//main function calcualte
+//main function calculate
 
 function calculate(input) {
-    const inputArray = input.split("");
-    for (let i = inputArray.length - 1; i >= 0; i-- ) {
-        if (isNaN(inputArray[i]) === false && isNaN(inputArray[i-1]) === false) {
+    const inputArray = input.split(""); //splits array in characters 
+    let errorCheck = true;      //if true: no error, else error
+    if (operators.includes(inputArray[0]) || operators.includes(inputArray[inputArray.length - 1]) || inputArray[0] === "!" || inputArray[inputArray.length - 1] === "√" ) {
+        errorCheck = false; //checks for double squareroots, double factorials, factorials on position 0 and squareroots at the last position  
+    };
+    for (let i = inputArray.length - 1; i >= 0; i-- ) { //takes splitted array and adds decimals and numbers with multiple places (Stellen)
+        if(isNaN(inputArray[i]) === false && isNaN(inputArray[i-1]) === false) {
             inputArray[i-1] = inputArray[i-1] + inputArray[i];
             inputArray.splice(i, 1);
         }
@@ -156,24 +161,46 @@ function calculate(input) {
             inputArray[i-2] = inputArray[i-2] + "." + inputArray[i];
             inputArray.splice(i-1, 2);
         }
-        else if (inputArray[i-1] === "√" && isNaN(inputArray[i]) === false) {
+        else if (checkForTwoOperators(inputArray[i], inputArray[i-1])) {    //check for double operators
+            errorCheck = false;
+            break;
+        }
+    };
+    for (let i = inputArray.length - 1; i>= 0; i--) {
+        if (checkForDoublePoint(inputArray[i])) {       //Check for two points in one number
+            errorCheck = false;
+            break;
+        }
+        else if (inputArray[i] === "!" && isNaN(inputArray[i-1]) === false ) {   //calculates factorials
+            const inputFactorial = inputArray[i-1].split("");
+            if (checkForPoint(inputFactorial)) {
+                errorCheck = false;
+            }
+            else {
+                inputArray[i-1] = factorial(inputArray[i-1]);
+                inputArray.splice(i, 1);
+            };
+        }
+        else if (inputArray[i-1] === "√" && isNaN(inputArray[i]) === false) {   //calculates squareroots
             inputArray[i-1] = Math.sqrt(inputArray[i]);
             inputArray.splice(i, 1);
-        }
-        else if (inputArray[i] === "!" && isNaN(inputArray[i-1]) === false ) {
-            inputArray[i-1] = factorial(inputArray[i-1]);
-            inputArray.splice(i, 1);
-        }
+        };
     };
-    while (inputArray[2] != undefined) {
-        inputArray[0] = operate(Number(inputArray[0]),inputArray[1],Number(inputArray[2]));
-        inputArray.splice(2,1);
-        inputArray.splice(1,1);
+    if (errorCheck) {
+        while (inputArray[2] != undefined) {    //calculates power, addition, substraction, multiplication, division
+            inputArray[0] = operate(Number(inputArray[0]),inputArray[1],Number(inputArray[2])); 
+            inputArray.splice(2,1);
+            inputArray.splice(1,1);
+        };
+        output = inputArray[0];
+        answer = output;
+        outputField.textContent = output;
+    }
+    else {
+        output = "ERROR";
+        outputField.textContent = output;
     };
-    output = inputArray[0];
-    answer = output;
-    outputField.textContent = output;
-}
+};
 
 //operating functions
 
@@ -225,3 +252,39 @@ function operate(num1,operator,num2) {
         return power(num1,num2);
     }
 }
+
+//Check for point for factorial
+
+function checkForPoint(array) {
+    let pointTrue;
+    for (const thing of array) {
+        if (thing === ".") {
+            pointTrue = true;
+        }
+    };
+    return pointTrue;
+}
+
+//Check for two operators
+
+function checkForDoublePoint(thisInput) {
+    let pointCounter = 0;
+    const splitted = thisInput.toString().split("");
+    for (const part of splitted) {
+        if (part === ".") {
+            pointCounter++;
+        }
+    }
+    if (pointCounter > 1) {
+        return true;
+    };
+};
+
+function checkForTwoOperators(arg1, arg2) {
+    if (operators.includes(arg1) && operators.includes(arg2)) {
+        return true;
+    }
+    else if ((arg1 === "!" && arg2 === "!") || (arg1 === "√" && arg2 === "√")) {
+        return true;
+    }
+};

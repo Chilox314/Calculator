@@ -14,10 +14,17 @@
                 <h1>Instructions:</h1>
                 <p>
                     This Calculator works from left to right.</br>
-                    It does not prefer ^, * and / over + and -.</br>
-                    ! and &Sqrt; will be calculated first.</br>
+                    Operator order: !, &Sqrt;, then from left to right.</br>
                     No support for signs yet. </br>
                 </p>
+                <h2>Errorcauses:</h2>
+                <li>
+                        <ul>Factorials with a floating point</ul>
+                        <ul>Dividing by zero</ul>
+                        <ul>Two floating points in one number</ul> 
+                        <ul>Two operators following each other</ul>    
+                        <ul>x!y or x&Sqrt;y can lead to unwanted results due to missing operators.</ul>
+                </li>
                 <a href="index.html" alt="calculator" class="whiteFont">Back to Calculator</a>
             </div>
             <div class="placeholder">
